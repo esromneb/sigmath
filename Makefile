@@ -17,3 +17,11 @@ testnogui:
 
 plot:
 	python test_sigmath.py plot
+
+
+.PHONY: freeze unfreeze
+freeze:
+	pip freeze > requirements.txt
+
+unfreeze:
+	pip install -r requirements.txt
