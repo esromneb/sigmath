@@ -31,3 +31,6 @@ jobs:
     # - name: Test with pytest
       # run: |
         # pytest
+    - name: Run semi tests
+      run: |
+        cd test && python test1.py
