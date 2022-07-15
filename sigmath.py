@@ -133,16 +133,16 @@ def s_(*args):
     out = out[:-1]
     return out
 
-# def print_hex(str, ascii = False):
-#     print 'hex:'
-#     tag = ''
-#     for b in str:
-#         if ascii:
-#             if b in string.printable:
-#                 tag = b
-#             else:
-#                 tag = '?'
-#         print ' ', format(ord(b), '02x'), tag
+def print_hex(str, ascii = False):
+    print('hex:')
+    tag = ''
+    for b in str:
+        if ascii:
+            if b in string.printable:
+                tag = b
+            else:
+                tag = '?'
+        print (' ', format(ord(b), '02x'), tag)
 
 def print_dec(str):
     print('hex:')
