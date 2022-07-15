@@ -14,7 +14,7 @@ class OsiBaseInterfaceTop(Interface):
 
     ## receive from upper layer  VIRTUAL
     def rxup(self, data, meta=None):
-        print "warning", self, "does not impliment rxup()"
+        print("warning", self, "does not impliment rxup()")
         return self.txdown(data, meta)
 
     ## transmit to the upper layer
@@ -30,7 +30,7 @@ class OsiBaseInterfaceBottom(Interface):
     ## receive from the lower layer  VIRTUAL
     #  @param meta is meta data usually a {}z
     def rxdown(self, data, meta=None):
-        print "warning", self, "does not impliment rxdown()"
+        print("warning", self, "does not impliment rxdown()")
         return self.txup(data, meta)
 
 class OsiBaseInterface(OsiBaseInterfaceBottom, OsiBaseInterfaceTop, TickableInterface):

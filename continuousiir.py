@@ -18,7 +18,7 @@ class ContinuousIIR(OsiBase):
 
     ## Not used
     def rxdown(self, data, meta=False):
-        print "not used"
+        print("not used")
 
     ## Receive data from up
     def rxup(self, data, meta=False):

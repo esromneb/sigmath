@@ -22,9 +22,9 @@ import numpy as np
 import inspect
 import matplotlib.pyplot as plt
 # import pyximport;pyximport.install()
-import zmq
+# import zmq
 
-from osibase import OsiBase
+# from osibase import OsiBase
 from filterelement import FilterElement
 # from sigmathcython import *
 
@@ -101,23 +101,23 @@ def raw_to_complex_multi(raw_bytes):
     return floats_recovered
 
 # a pretty-print for hex strings
-def get_rose(data):
-    try:
-        ret = ' '.join("{:02x}".format(ord(c)) for c in data)
-    except TypeError, e:
-        ret = str(data)
-    return ret
+# def get_rose(data):
+#     try:
+#         ret = ' '.join("{:02x}".format(ord(c)) for c in data)
+#     except TypeError, e:
+#         ret = str(data)
+#     return ret
 
-def print_rose(data):
-    print get_rose(data)
+# def print_rose(data):
+#     print get_rose(data)
 
-def get_rose_int(data):
-    # adding int values
-    try:
-        ret = ' '.join("{:02}".format(ord(c)) for c in data)
-    except TypeError, e:
-        ret = str(data)
-    return ret
+# def get_rose_int(data):
+#     # adding int values
+#     try:
+#         ret = ' '.join("{:02}".format(ord(c)) for c in data)
+#     except TypeError, e:
+#         ret = str(data)
+#     return ret
 
 # if you want to go from the pretty print version back to a string (this would not be used in production)
 def reverse_rose(input):
@@ -133,21 +133,21 @@ def s_(*args):
     out = out[:-1]
     return out
 
-def print_hex(str, ascii = False):
-    print 'hex:'
-    tag = ''
-    for b in str:
-        if ascii:
-            if b in string.printable:
-                tag = b
-            else:
-                tag = '?'
-        print ' ', format(ord(b), '02x'), tag
+# def print_hex(str, ascii = False):
+#     print 'hex:'
+#     tag = ''
+#     for b in str:
+#         if ascii:
+#             if b in string.printable:
+#                 tag = b
+#             else:
+#                 tag = '?'
+#         print ' ', format(ord(b), '02x'), tag
 
 def print_dec(str):
-    print 'hex:'
+    print('hex:')
     for b in str:
-        print ' ', ord(b)
+        print (' ', ord(b))
 
 # http://stackoverflow.com/questions/10237926/convert-string-to-list-of-bits-and-viceversa
 def str_to_bits(s):
@@ -201,7 +201,7 @@ def drange(start, end=None, inc=None):
     L = [None,] * count
 
     L[0] = start
-    for i in xrange(1,count):
+    for i in range(1,count):
         L[i] = L[i-1] + inc
     return L
 
@@ -245,61 +245,61 @@ def ip_to_str(address):
     return socket.inet_ntop(socket.AF_INET, address)
 
 
-def nonblock_read(sock, size):
-    try:
-        buf = sock.read()
-    except IOError, e:
-        err = e.args[0]
-        if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
-            return None  # No data available
-        else:
-            # a "real" error occurred
-            print e
-            sys.exit(1)
-    else:
-        if len(buf) == 0:
-            return None
-        return buf
+# def nonblock_read(sock, size):
+#     try:
+#         buf = sock.read()
+#     except IOError, e:
+#         err = e.args[0]
+#         if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
+#             return None  # No data available
+#         else:
+#             # a "real" error occurred
+#             print e
+#             sys.exit(1)
+#     else:
+#         if len(buf) == 0:
+#             return None
+#         return buf
 
 # returns None if socket doesn't have any data, otherwise returns a list of bytes
 # you need to set os.O_NONBLOCK on the socket at creation in order for this function to work
 #   fcntl.fcntl(sock, fcntl.F_SETFL, os.O_NONBLOCK)
-def nonblock_socket(sock, size):
-    # this try block is the non blocking way to grab UDP bytes
-    try:
-        buf = sock.recv(size)
-    except socket.error, e:
-        err = e.args[0]
-        if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
-            return None  # No data available
-        else:
-            # a "real" error occurred
-            print e
-            sys.exit(1)
-    else:
-        # got data
-        return buf
+# def nonblock_socket(sock, size):
+#     # this try block is the non blocking way to grab UDP bytes
+#     try:
+#         buf = sock.recv(size)
+#     except socket.error, e:
+#         err = e.args[0]
+#         if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
+#             return None  # No data available
+#         else:
+#             # a "real" error occurred
+#             print e
+#             sys.exit(1)
+#     else:
+#         # got data
+#         return buf
 
-def nonblock_socket_from(sock, size):
-    # this try block is the non blocking way to grab UDP bytes
-    try:
-        buf, addr = sock.recvfrom(size)
-    except socket.error, e:
-        err = e.args[0]
-        if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
-            return None, None  # No data available
-        else:
-            # a "real" error occurred
-            print e
-            sys.exit(1)
-    else:
-        # got data
-        return buf, addr
+# def nonblock_socket_from(sock, size):
+#     # this try block is the non blocking way to grab UDP bytes
+#     try:
+#         buf, addr = sock.recvfrom(size)
+#     except socket.error, e:
+#         err = e.args[0]
+#         if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
+#             return None, None  # No data available
+#         else:
+#             # a "real" error occurred
+#             print e
+#             sys.exit(1)
+#     else:
+#         # got data
+#         return buf, addr
 
 
 def chunks(l, n):
     """Yield successive n-sized chunks from l."""
-    for i in xrange(0, len(l), n):
+    for i in range(0, len(l), n):
         yield l[i:i+n]
 
 def save_rf_grc(filename, data):
@@ -961,42 +961,42 @@ def sig_everyn(data, n, phase=0):
 
 # http://stackoverflow.com/questions/17904097/python-difference-between-two-strings/17904977#17904977
 
-def sig_diff(a,b,max=False):
-    at = time.time()
-    count = 0
-    # print('{} => {}'.format(a,b))
-    for i,s in enumerate(difflib.ndiff(a, b)):
-        if s[0]==' ': continue
-        elif s[0]=='-':
-            try:
-                c = u'{}'.format(s[-1])
-            except:
-                c = ' '
-            print(u'Delete "{}" from position {}'.format(c,i))
-        elif s[0]=='+':
-            print(u'Add "{}" to position {}'.format(s[-1],i))
-        count += 1
-        if max and count >= max:
-            print "stopping after", count, "differences"
-            break
-    print()
-    bt = time.time()
-    print "sig_diff() ran in ", bt-at
+# def sig_diff(a,b,max=False):
+#     at = time.time()
+#     count = 0
+#     # print('{} => {}'.format(a,b))
+#     for i,s in enumerate(difflib.ndiff(a, b)):
+#         if s[0]==' ': continue
+#         elif s[0]=='-':
+#             try:
+#                 c = u'{}'.format(s[-1])
+#             except:
+#                 c = ' '
+#             print(u'Delete "{}" from position {}'.format(c,i))
+#         elif s[0]=='+':
+#             print(u'Add "{}" to position {}'.format(s[-1],i))
+#         count += 1
+#         if max and count >= max:
+#             print "stopping after", count, "differences"
+#             break
+#     print()
+#     bt = time.time()
+#     print "sig_diff() ran in ", bt-at
 
-def sig_diff2(a, b, unused=False):
-    lmin = min(len(a),len(b))
-    lmax = max(len(a),len(b))
-
-    errors = 0
-    for i in range(lmin):
-        if a[i] != b[i]:
-            errors += 1
-
-    errors += lmax-lmin
-    if lmax != lmin:
-        print "Strings were", errors, "different with additional", lmax-lmin, "due to length differences"
-    else:
-        print "Strings were", errors, "different"
+# def sig_diff2(a, b, unused=False):
+#     lmin = min(len(a),len(b))
+#     lmax = max(len(a),len(b))
+# 
+#     errors = 0
+#     for i in range(lmin):
+#         if a[i] != b[i]:
+#             errors += 1
+# 
+#     errors += lmax-lmin
+#     if lmax != lmin:
+#         print "Strings were", errors, "different with additional", lmax-lmin, "due to length differences"
+#     else:
+#         print "Strings were", errors, "different"
 
 
 # builds a ring of evenly spaced points, used for circular QAM
@@ -1029,7 +1029,7 @@ def listClosestDistance(points, verbose=True):
                     best = diff
                     closestpair = (pouter,pinner)
         if verbose:
-            print "closest", best, closestpair
+            print("closest", best, closestpair)
 
         return (best,closestpair)
 
@@ -1263,7 +1263,7 @@ def butter_lowpass(cutoff, fs, order):
 def printOsiStack(stack):
     ptr = stack
 
-    print "Bottom item is lowest:"
+    print("Bottom item is lowest:")
 
     lines = []
 
@@ -1276,7 +1276,7 @@ def printOsiStack(stack):
     lines.reverse()
 
     for l in lines:
-        print l
+        print(l)
 
 
 def osc_freq_drift(prev,time,Fc):
@@ -1343,18 +1343,18 @@ class ExposeDictionary(dict):
      __setattr__ = dict.__setitem__
      __delattr__ = dict.__delitem__
 
-from stackcall import StackCall
-from continuousiir import ContinuousIIR
+# from stackcall import StackCall
+# from continuousiir import ContinuousIIR
 
 def sig_upfirn_real(data,filter,up,down):
 
     dup = zero_insertion_upsample_real(data, up)
-    print "len dup", len(dup)
+    print("len dup", len(dup))
 
 
     filtero = StackCall(ContinuousIIR(filter, [1.0]))
 
-    print "lengh of input plus length of filter minus 1", len(dup) + len(filter)-1
+    print("lengh of input plus length of filter minus 1", len(dup) + len(filter)-1)
 
     extra = max(0,len(filter)-1)
 
@@ -1446,7 +1446,7 @@ def lineno(up = 0):
 
 def sigtest_requires_gui(some_function):
     def wrapper(*args, **kwargs):
-        if os.environ.has_key("UNITTEST_NO_X11"):
+        if "UNITTEST_NO_X11" in os.environ:
             return
         some_function(*args, **kwargs)
     return wrapper
@@ -1455,21 +1455,21 @@ def sigtest_requires_gui(some_function):
 # eaiser because tests specifically say what they require
 def sigtest_requires_octave(some_function):
     def wrapper(*args, **kwargs):
-        if os.environ.has_key("UNITTEST_NO_X11"):
+        if "UNITTEST_NO_X11" in os.environ:
             return
         some_function(*args, **kwargs)
     return wrapper
 
 def sigtest_artik_will_skip(some_function):
     def wrapper(*args, **kwargs):
-        if os.environ.has_key("UNITTEST_NO_X11"):
+        if "UNITTEST_NO_X11" in os.environ:
             return
         some_function(*args, **kwargs)
     return wrapper
 
 
 
-if os.environ.has_key("UNITTEST_NO_X11"):
+if "UNITTEST_NO_X11" in os.environ:
     def nplot_dummy(*args, **kwargs):
         pass
 

@@ -30,12 +30,12 @@ class OsiBase(implements(OsiBaseInterface)):
     ## Receive from the lower layer VIRTUAL
     #  @param meta is meta data usually a {}
     def rxdown(self, data, meta=None):
-        print "warning", self, "does not implement rxdown()"
+        print("warning", self, "does not implement rxdown()")
         return self.txup(data, meta)
 
     ## Receive from upper layer VIRTUAL
     def rxup(self, data, meta=None):
-        print "warning", self, "does not implement rxup()"
+        print("warning", self, "does not implement rxup()")
         return self.txdown(data, meta)
 
     ## Call this regularly on blocks which implement it. Dummy for now
