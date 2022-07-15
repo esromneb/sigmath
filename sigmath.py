@@ -1435,6 +1435,48 @@ def root_cosine(N, L, alpha, apply_window=False):
 
     return h
 
+def better_open_csv(filename):
+
+    o = ExposeDictionary(dict([]))
+    haveHeader = False
+    width = None
+
+    # read a CSV file
+    file = open(filename, 'r')
+    reader = csv.reader(file, delimiter=',', quotechar='|')
+    # data = []
+    for row in reader:
+        if width is None:
+            width = len(row)
+            o.data = []
+            for i in range(width):
+                o.data.append([])
+            # print(o.data)
+
+        if not haveHeader:
+            if(type(row[0]) == type('')):
+                haveHeader = True
+                o.header = []
+                for i in range(width):
+                    o.header.append(row[i])
+                # print(o)
+                continue
+
+        for i in range(width):
+            o.data[i].append(float(row[i]))
+        # o.data.append([float(x) for x in row])
+        # print([float(x) for x in row])
+        # print(len(o.data))
+
+        # if len(o.data[0]) >= 9:
+        #     break
+
+        # print(type(row[0]))
+        # dr = [float(row[0]), float(row[1])]
+        # data.append(dr)
+    file.close()
+    return o
+
 
 
 ## Returns the current line number in our program.
