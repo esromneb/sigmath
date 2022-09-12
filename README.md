@@ -12,6 +12,17 @@ After you get pip:
 pip install scikit-commpy python-interface
 ```
 
+On Ubuntu 20.04 you may get this error:
+
+```bash
+UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+```
+
+Solve it with
+```bash
+apt-get install python3.8-tk
+```
+
 # Show plots :100:
 Show visual test coverage of all plotting types we have sugar for.
 
